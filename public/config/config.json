@@ -1,0 +1,18 @@
+{
+  "CONTRACT_ADDRESS": "0x1c7eFE7Fa5069ab9C1aA65f2F94200eD531b1a7A",
+  "SCAN_LINK": "https://etherscan.io/address/0x1c7eFE7Fa5069ab9C1aA65f2F94200eD531b1a7A#code",
+  "NETWORK": {
+    "NAME": "Ethereum",
+    "SYMBOL": "Eth",
+    "ID": 1
+  },
+  "NFT_NAME": "Winter Elves",
+  "SYMBOL": "ELF",
+  "MAX_SUPPLY": 8888,
+  "WEI_COST": 55000000000000000,
+  "DISPLAY_COST": 0.055,
+  "GAS_LIMIT": 285000,
+  "MARKETPLACE": "Opeansea",
+  "MARKETPLACE_LINK": "",
+  "SHOW_BACKGROUND": true
+}

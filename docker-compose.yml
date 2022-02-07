@@ -1,0 +1,36 @@
+version: "3.7"
+
+services:
+
+  nginx:
+    container_name: core_web
+    restart: on-failure
+    image: jonasal/nginx-certbot:latest
+    env_file:
+      - .env.nginx
+    volumes:
+      - nginx_secrets:/etc/letsencrypt
+      - ./nginx/user_conf.d:/etc/nginx/user_conf.d
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - web
+
+  web:
+    container_name: react_app
+    restart: on-failure
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./src:/app/src
+    ports:
+      - "5000:5000"
+    command: >
+      sh -c "yarn build && serve -s build"
+    env_file:
+      - .env
+
+volumes:
+  nginx_secrets:

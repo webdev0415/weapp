@@ -1,0 +1,36 @@
+name: React Testing and Deploying
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    name: Tests
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Installing dependencies
+        run: yarn install
+
+      - name: Running Test
+        run: yarn test
+        
+deploy:
+    name: Deploying
+    needs: [test]
+    runs-on: ubuntu-20.04
+    steps:
+      - name: SSH & Deploy
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_AWS_SERVER_IP }}
+          username: ${{ secrets.SSH_SERVER_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          script: |
+            cd ~/.scripts
+            ./docker-deploy.sh
